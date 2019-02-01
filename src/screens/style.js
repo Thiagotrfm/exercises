@@ -1,11 +1,17 @@
 import { StyleSheet } from 'react-native';
+import COLORS         from '../assets/colors';
 
 const styles = StyleSheet.create({
   container: {
+    backgroundColor: COLORS.grey,
     flex: 1,
+  },
+  content: {
+    top: 50,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#F5FCFF',
+    backgroundColor: COLORS.grey,
+    color: COLORS.textColor,
   },
   welcome: {
     fontSize: 20,
@@ -17,6 +23,16 @@ const styles = StyleSheet.create({
     color: '#333333',
     marginBottom: 5,
   },
+  containerStyle: {
+    justifyContent: 'space-around',
+    borderBottomColor: COLORS.grey,
+    backgroundColor: COLORS.grey,
+    height: 40,
+    width: '100%',
+  },
+  iconContainer: {
+    margin: 0
+  }
 });
 
 export default styles
