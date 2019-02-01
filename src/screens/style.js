@@ -32,7 +32,13 @@ const styles = StyleSheet.create({
   },
   iconContainer: {
     margin: 0
-  }
+  },
+  filtersContainer: {
+    backgroundColor: COLORS.lightgrey,
+    width: '85%',
+    height: 90,
+    borderRadius: 10,
+  },
 });
 
 export default styles

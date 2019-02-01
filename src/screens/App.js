@@ -1,6 +1,6 @@
 import React      from 'react';
 import {
-  Platform,
+  ScrollView,
   Text,
   View
 }                 from 'react-native';
@@ -9,16 +9,18 @@ import {
 }                 from 'react-native-elements';
 import styles     from './style';
 import { Icon }   from 'react-native-elements';
+import { MOCK }   from '../settings/mock';
+import Filter     from '../components/Filter/index'
 
-const instructions = Platform.select({
-  ios: 'Press Cmd+R to reload,\n' + 'Cmd+D or shake for dev menu',
-  android:
-    'Double tap R on your keyboard to reload,\n' +
-    'Shake or press menu button for dev menu',
-});
+class App extends React.Component {
 
+  constructor(props){
+    super(props);
 
-export default class App extends React.Component {
+    this.state = {
+      teste: 'Teste'
+    }
+  }
 
   renderHeader() {
     return(
@@ -51,14 +53,33 @@ export default class App extends React.Component {
     )
   }
 
+  renderFilters(){
+    return(
+      <ScrollView 
+        style = { styles.filtersContainer }
+        horizontal = { true }
+        showsHorizontalScrollIndicator = { false }
+      >
+        {
+          MOCK.filters.map((filter, index) => {
+            return(
+              <Filter
+                key = { index }
+                filter = { filter }  
+              />
+            )
+          })
+        }
+      </ScrollView>
+    )
+  }
+
   render() {
     return (
       <View style={styles.container}>
         { this.renderHeader() }
         <View style={styles.content}>
-          <Text style={styles.welcome}>Welcome to React Native!</Text>
-          <Text style={styles.instructions}>To get started, edit App.js</Text>
-          <Text style={styles.instructions}>{instructions}</Text>
+          { this.renderFilters() }
         </View>
       </View>
     );
@@ -66,3 +87,4 @@ export default class App extends React.Component {
 }
 
 
+export default App;
