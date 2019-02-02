@@ -40,7 +40,7 @@ export const MOCK = ﻿{
       },
       {
         name: "Musculação",
-        image: 'bodybuilding',
+        image: 'gym',
         calories: 950,
         time: 60,
         weight: 52,

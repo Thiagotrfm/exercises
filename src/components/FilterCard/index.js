@@ -10,7 +10,7 @@ import COLORS           from '../../assets/colors';
 import { IMAGES }       from '../../settings/images';
 import { Icon } from 'react-native-elements';
 
-class Filter extends React.Component {
+class FilterCard extends React.Component {
 
     constructor(props){
         super(props);
@@ -25,6 +25,7 @@ class Filter extends React.Component {
         this.setState({
             selected: !this.state.selected,
         })
+        this.props.handleFilterChange(this.state.filter.name)
       }
 
     render() {
@@ -57,4 +58,4 @@ class Filter extends React.Component {
 }
 
 
-export default Filter;
+export default FilterCard;

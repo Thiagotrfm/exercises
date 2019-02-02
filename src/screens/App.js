@@ -1,16 +1,17 @@
-import React      from 'react';
+import React        from 'react';
 import {
   ScrollView,
   Text,
   View
-}                 from 'react-native';
+}                   from 'react-native';
 import {
   Header
-}                 from 'react-native-elements';
-import styles     from './style';
-import { Icon }   from 'react-native-elements';
-import { MOCK }   from '../settings/mock';
-import Filter     from '../components/Filter/index'
+}                   from 'react-native-elements';
+import styles       from './style';
+import { Icon }     from 'react-native-elements';
+import { MOCK }     from '../settings/mock';
+import FilterCard       from '../components/FilterCard/index'
+import ExerciseCard from '../components/ExerciseCard'
 
 class App extends React.Component {
 
@@ -18,7 +19,41 @@ class App extends React.Component {
     super(props);
 
     this.state = {
-      teste: 'Teste'
+      filteredExercises: MOCK.filters,
+      filter: [],
+      exercises: MOCK.exercices,
+    }
+  }
+
+  handleFilterChange(newFilterOption){
+    let newFilter = [];
+
+    if(this.state.filter.length){
+      let filter = this.state.filter.slice();
+
+      if(filter.includes(newFilterOption))
+        newFilter = filter.filter(filterOption => filterOption !== newFilterOption)
+      else {
+        filter.push(newFilterOption)
+        newFilter = filter.slice();
+      }
+      
+      this.setState({
+        filter: newFilter,
+        exercises: newFilter.length === 0 ?
+                   MOCK.exercices :
+                   MOCK.exercices.filter(exercise => newFilter.includes(exercise.name))
+      })
+    } else {
+      filter = []
+      filter.push(newFilterOption)
+    
+      this.setState({
+        filter: filter,
+        exercises: filter.length === 0 ?
+                   MOCK.exercices :
+                   MOCK.exercices.filter(exercise => filter.includes(exercise.name))
+      })
     }
   }
 
@@ -61,11 +96,12 @@ class App extends React.Component {
         showsHorizontalScrollIndicator = { false }
       >
         {
-          MOCK.filters.map((filter, index) => {
+          this.state.filteredExercises.map((filter, index) => {
             return(
-              <Filter
+              <FilterCard
                 key = { index }
-                filter = { filter }  
+                filter = { filter }
+                handleFilterChange = { this.handleFilterChange.bind(this) } 
               />
             )
           })
@@ -74,13 +110,31 @@ class App extends React.Component {
     )
   }
 
+  renderExercises(){
+    return(
+      <View>
+        { this.state.exercises.map((exercise, index) => {
+          return(
+            <ExerciseCard
+              key       = { index }
+              exercise  = { exercise }
+            />
+          )
+        })}
+      </View>
+    )
+  }
+
   render() {
     return (
       <View style={styles.container}>
         { this.renderHeader() }
-        <View style={styles.content}>
+        <ScrollView>
+          <View style={styles.content}>
           { this.renderFilters() }
-        </View>
+          { this.renderExercises() }
+          </View>
+        </ScrollView>
       </View>
     );
   }

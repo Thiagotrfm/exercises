@@ -7,11 +7,12 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   content: {
-    top: 50,
+    top: 20,
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: COLORS.grey,
     color: COLORS.textColor,
+    marginBottom: 90,
   },
   welcome: {
     fontSize: 20,
@@ -27,7 +28,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-around',
     borderBottomColor: COLORS.grey,
     backgroundColor: COLORS.grey,
-    height: 40,
+    height: 80,
     width: '100%',
   },
   iconContainer: {
@@ -35,7 +36,7 @@ const styles = StyleSheet.create({
   },
   filtersContainer: {
     backgroundColor: COLORS.lightgrey,
-    width: '85%',
+    width: 320,
     height: 90,
     borderRadius: 10,
   },
